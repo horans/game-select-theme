@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="./vendor/bootstrap-reboot.min.css">
+    <link rel="stylesheet" href="./asset/loading.css.animation.css">
+    <link rel="stylesheet" href="./theme-select.css">
+    <link rel="shortcut icon" href="./asset/favicon.ico" />
+    <title>Theme Select</title>
+  </head>
+  <body>
+    <!--
+    /*****************************************************
+    *  project: game theme select                        *
+    *  description: iframe to be embedded                *
+    *  author: horans@gmail.com                          *
+    *  url: https://github.com/horans/game-theme-select  *
+    *  update: 180816                                    *
+    *****************************************************/
+    -->
+
+    <main id="app" class="gst-app" :class="{ 'ready': state.init, 'loading': state.wait, 'running': game.running, 'iframe': state.iframe }">
+      <article class="gst-container shadow">
+        <section class="gst-main">
+          <div class="gst-stage center" v-if="state.init">
+            <div class="gst-stage-top transition delay">
+              <div class="gst-timer box shadow">{{ timer }}s <small>{{ frame }}/{{ game.config.total }}</small></div>
+            </div>
+            <div class="gst-frames-wrapper">
+              <ul class="gst-frames transition" :style="{ width: (game.frames.length || 1) + '00%', transform: 'translateX(-' + game.current * 100/(game.frames.length || 1) + '%)' }">
+                <li class="float" v-for="item in game.frames" :style="{ width: 100/(game.frames.length || 1) + '%' }">
+                  <div class="gst-frame background" :style="{ backgroundImage: 'url(' + item.cover + ')' }"></div>
+                </li>
+              </ul>
+            </div>
+            <div class="gst-stage-bottom transition delay">
+              <ul class="gst-options">
+                <li class="box hand transition shadow" v-for="(item, index) in game.frames[game.current].options" :style="{ width: 100/game.config.option + '%' }" @click="selectOption(item, index)" :ref="'option-' + index">{{ item }}</li>
+              </ul>
+              <div class="gst-tick">
+                <div class="gst-remain shadow" ref="remain" :style="{ animationDuration: game.config.tick + 's' }"></div>
+              </div>
+            </div>
+          </div>
+          <div class="gst-cover center">
+            <div class="gst-back">
+              <ul class="gst-covers">
+                <li class="float background" v-for="item in game.covers" :style="{ width: 100 * 2 / game.cover + '%', height: '50%', backgroundImage: 'url(' + item.cover + ')' }"></li>
+              </ul>
+            </div>
+            <div class="gst-front">
+              <h1 class="gst-heading">{{ game.config.title }}</h1>
+              <div class="gst-start">
+                <button class="gst-button" @click="startGame" v-html="again ? 'Restart <small>with Same Level</small>' : 'Start Now'"></button>
+              </div>
+              <div class="gst-rules" v-if="state.iframe && !again">How to play the game? <span class="hand" @click="notifyParent('rules')">Get a hint &raquo;</span></div>
+              <div class="gst-result" v-if="again">
+                <span>score: {{ game.last.score }}</span>
+                <span>total: {{ game.last.total }}</span>
+                <span>time: {{ formatTime(game.last.time) }}s</span>
+                <span>level: {{ game.last.level }}</span>
+              </div>
+              <div class="gst-levels" v-if="again">
+                <button class="gst-button gst-button-small" v-for="item in game.levels" @click="switchLevel(item)">{{ item }}</button>
+              </div>
+              <div class="gst-themes">
+                <span>{{ game.config.themes }}:</span>
+                <ul><li v-for="item in themes"><i>&sdot;</i> {{ item }}</li></ul>
+              </div>
+            </div>
+          </div>
+        </section>
+        <aside class="gst-loading transition">
+          <div class="gst-loading-item transition" ></div>
+        </aside>
+      </article>
+    </main>
+
+    <!-- vendor -->
+    <script src="./vendor/vue.js"></script>
+    <script src="./vendor/axios.min.js"></script>
+    <script src="./vendor/lodash.min.js"></script>
+    <script src="./vendor/vue-axios.min.js"></script>
+    <script src="./vendor/webfontloader.js"></script>
+    <script src="./vendor/es6-promise.auto.min.js"></script>
+    <!-- inpage -->
+    <script src="./theme-select.js"></script>
+  </body>
+</html>

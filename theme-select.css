@@ -1,0 +1,85 @@
+/*****************************************************
+*  project: game theme select                        *
+*  description: inpage styles                        *
+*  author: horans@gmail.com                          *
+*  url: https://github.com/horans/game-theme-select  *
+*  update: 180816                                    *
+*****************************************************/
+/* common */
+/* csslint ignore: start */
+:root { --primary: #313131; --secondary: #ffa818; --coral: #f37460; }
+/* csslint ignore: end */
+.wf-active body { font-family: "Muli", Arial, sans-serif; }
+ul { list-style: none; margin: 0; margin-block-end: 0; margin-block-start: 0; padding-inline-start: 0; } /* csslint allow: known-properties */
+a, button, .transition { -webkit-transition: all ease-out .1s; -o-transition: all ease-out .1s; -moz-transition: all ease-out .1s; transition: all ease-out .1s; }
+.delay { transition-delay: .15s; }
+.background { background-position: center; background-repeat: no-repeat; background-size: cover; }
+.box { display: inline-block; vertical-align: top; }
+.center { text-align: center; }
+.float { float: left; }
+.hand { cursor: pointer; }
+.shadow { filter: drop-shadow(0 0 .125rem rgba(49, 49, 49, .3)); }
+/* layout */
+.gst-app { background-color: white; color: var(--primary); line-height: 1.25; min-height: 100vh; padding: 5rem 1rem; position: relative; text-transform: capitalize; user-select: none; } /* csslint allow: known-properties */
+.gst-container { background-color: var(--primary); border: solid 5px var(--primary); border-radius: 13px; margin: 0 auto; max-width: 730px; overflow: hidden; position: relative; } /* csslint allow: known-properties */
+.iframe { padding: 0; } /* csslint allow: known-properties */
+.gst-main { height: 0; padding-bottom: 69.444%; }
+/* loading */
+.gst-loading, .gst-cover, .gst-back, .gst-back::before { background-color: var(--primary); height: 100%; left: 0; position: absolute; top: 0; width: 100%; z-index: 3; } /* csslint allow: known-properties */
+.gst-loading-item { display: block; height: 80px; left: calc(50% - 40px); pointer-events: none; position: absolute; top: calc(50% - 40px); width: 80px; }
+.ready .gst-loading, .running .gst-cover { opacity: 0; z-index: -1; }
+.ready .gst-loading-item { opacity: 0; }
+.ready .gst-loading-line { animation: none; }
+.ready.loading .gst-loading { opacity: .3; z-index: 2; } /* csslint allow: adjoining-classes */
+/* stage */
+.gst-stage { opacity: 0; overflow: hidden; position: relative; }
+.gst-stage-top, .gst-stage-bottom { color: white; left: 0; margin: 0 auto; position: absolute; right: 0; z-index: 2; } /* csslint allow: known-properties */
+.gst-stage-top { transform: translateY(-100%); }
+.gst-timer { background-color: var(--secondary); font-size: 1.125rem; line-height: 2; padding: 0 .5rem; position: relative; } /* csslint allow: known-properties */
+.gst-timer small { margin-left: .5rem; }
+.gst-timer::before, .gst-timer::after { border-top: solid 2.25rem var(--secondary); content: ""; position: absolute; top: 0; } /* csslint allow: known-properties */
+.gst-timer::before { border-left: solid .625rem transparent; left: -.625rem; }
+.gst-timer::after { border-right: solid .625rem transparent; right: -.625rem; }
+.gst-stage-bottom { bottom: 0; transform: translateY(100%); }
+.gst-options li { background-color: black; background-color: rgba(49, 49, 49, .6); font-size: 1.25rem; padding: .75rem 0; position: relative; }
+.gst-options li:hover { background-color: black; background-color: rgba(255, 168, 24, .6) }
+.gst-options li:not(:last-of-type)::after { background-color: var(--primary); bottom: 0; content: ""; height: 100%; position: absolute; right: -0.5px; width: 1px; } /* csslint allow: known-properties */
+.gst-options .clicked { transform: translateY(10%); }
+.gst-tick { bottom: 0;  position: absolute; width: 100%; }
+.gst-remain { background-color: var(--secondary); border-bottom-left-radius: .125rem; border-top-left-radius: .125rem; height: .25rem; } /* csslint allow: known-properties */
+.gst-tick .ticking { animation: 3s linear ticking }
+.running .gst-stage { opacity: 1; }
+.running .gst-stage-top, .running .gst-stage-bottom { transform: translateY(0); }
+/* frame */
+.gst-frames-wrapper { overflow: hidden; position: relative; z-index: 1; }
+.gst-frames { overflow-x: auto; }
+.gst-frame { height: 0; padding-bottom: 69.444%; vertical-align: top; width: 100%; }
+/* cover */
+.gst-cover { color: white; padding: 2.5rem; z-index: 2; }
+.gst-covers { animation: covering 40s ease-in-out infinite; height: 100%; transform: translate3d(0, 0, 0); }
+.gst-back::before { background-color: black; background-color: rgba(49, 49, 49, .7); content: ""; }
+.gst-front { height: 100%; padding-top: 5rem; position: relative; z-index: 4; } /* csslint allow: box-model */
+.gst-heading { font-size: 2rem; margin: 0 0 1.75rem; }
+.gst-button { background-color: var(--secondary); border: none; cursor: pointer; font-size: 1.25rem; font-weight: 600; margin: 1rem; padding: .875rem 3rem; text-transform: capitalize; } /* csslint allow: known-properties */
+.gst-button:hover { transform: translateY(5%); }
+.gst-button:focus { outline: none; } /* csslint allow: outline-none */
+.gst-button-small { font-size: 1rem; margin: .5rem; padding: .5rem 1rem; }
+.gst-start small { font-size: 60%; }
+.gst-rules span { color: var(--coral); text-decoration: underline; } /* csslint allow: known-properties */
+.gst-result { margin: 1rem 0; }
+.gst-result span:not(:last-of-type)::after { content: "\2c"; }
+.gst-themes { bottom: 0; font-size: .875rem; position: absolute; width: 100%; }
+.gst-themes span, .gst-themes ul, .gst-themes li { display: inline; margin-left: .375rem; margin-right: .5rem; }
+.gst-themes i { color: var(--secondary); } /* csslint allow: known-properties */
+/* animation */
+@keyframes ticking { 0% { transform: translateX(0); } 99% { transform: translateX(99%); } }
+@keyframes covering { 0% { transform: scale(1.2) translate(5%, 5%); } 25% { transform: scale(1.25) translate(-5%, 5%); } 50% { transform: scale(1.2) translate(-5%, -5%); } 75% { transform: scale(1.15) translate(5%, -5%); } 100% { transform: scale(1.2) translate(5%, 5%); } }
+/* mobile */
+@media(max-width: 749px) {
+.gst-front { padding-top: 2rem; }
+.gst-heading { margin: 0 0 1rem; }
+.gst-rules, .gst-levels, .gst-themes { display: none; margin: 0; }
+}
+@media(max-width: 400px) {
+html { font-size: 12px; }
+}
