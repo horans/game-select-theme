@@ -3,7 +3,7 @@
 *  description: inpage functions                     *
 *  author: horans@gmail.com                          *
 *  url: https://github.com/horans/game-theme-select  *
-*  update: 180816                                    *
+*  update: 180818                                    *
 *****************************************************/
 /* global _, Vue, WebFont */
 /* eslint no-unused-vars: ["error", { "varsIgnorePattern": "gst" }] */
@@ -260,7 +260,9 @@ var gst = new Vue({
                 delete t.templates[i].title
                 delete t.templates[i].desc
                 t.templates[i].load = false
-                t.getImage('cover', o.cover, i)
+                setTimeout(function () {
+                  t.getImage('cover', o.cover, i)
+                }, Math.floor(i / 3) * 50)
               })
               t.$set(t.$data, 'themes', _.uniq(_.map(t.templates, 'theme')))
               break
@@ -281,8 +283,8 @@ var gst = new Vue({
       m.addEventListener('load', function () {
         if (type === 'cover') {
           t.templates[index].load = true
+          if (t.templates.length > 0 && _.filter(t.templates, function (o) { return o.load }).length === t.templates.length) t.$emit('gst.templates.ready')
         }
-        if (t.templates.length > 0 && _.filter(t.templates, function (o) { return o.load }).length === t.templates.length) t.$emit('gst.templates.ready')
       }, false)
     },
     // notify parent window if load as iframe

@@ -53,6 +53,26 @@ it will notify parent window by `[window.postMessage()](https://developer.mozill
 when each round of game is finished,
 and when user want to see detail of rules.
 
+```javascript
+// with native
+window.addEventListener('message', function(e) {
+  if (e.data.from === 'gst') {
+    console.log(e.data.action)
+    console.log(e.data.data)
+  }
+}, false)
+```
+
+```javascript
+// with jquery
+$(window).on('message', function (e) {
+  if (e.originalEvent.data.from === 'gst') {
+    console.log(e.originalEvent.data.action)
+    console.log(e.originalEvent.data.data)
+  }
+})
+```
+
 ## Extra
 
 ### Vendor
