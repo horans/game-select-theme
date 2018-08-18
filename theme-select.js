@@ -35,6 +35,7 @@ var gst = new Vue({
       levels: ['easy', 'normal', 'hard'],
       level: 'normal',
       running: false,
+      tutorial: false,
       time: {
         now: 0,
         start: 0,
@@ -133,6 +134,7 @@ var gst = new Vue({
     startGame: function () {
       this.state.submit = false
       this.game.running = true
+      this.game.tutorial = true
       this.game.time.start = Date.now()
       this.game.time.now = _.clone(this.game.time.start)
       this.game.time.tick = _.clone(this.game.time.start)
@@ -162,6 +164,35 @@ var gst = new Vue({
       o.remove('clicked')
       setTimeout(function () { o.add('clicked') }, 30)
       setTimeout(function () { o.remove('clicked') }, 150)
+    },
+    // show game tutorial
+    showTutorial: function () {
+      this.game.running = true
+      var t = this
+      var u = {}
+      var c = function () {
+        _.each(t.game.frames[0].options, function (o, i) {
+          u[o] = setTimeout(function () {
+            t.clickEffect(i)
+          }, i * 700)
+        })
+      }
+      c()
+      var s = setInterval(function () {
+        if (t.game.tutorial) {
+          clearInterval(s)
+        } else {
+          c()
+        }
+      }, 2100)
+      var n = setInterval(function () {
+        if (t.game.tutorial) {
+          clearInterval(n)
+          _.each(u, function (m, l) {
+            clearTimeout(u[l])
+          })
+        }
+      }, 200)
     },
     // end the current round
     endGame: function () {

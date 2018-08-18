@@ -6,6 +6,7 @@ base on cover images.
 
 * Configurable
 * Pre-load images
+* Tutorial
 * Auto countdown
 * Level select
 * Notify parent window
@@ -25,7 +26,7 @@ Upload everything to your server, eg.:
 Embed `iframe.html` into your page, eg.:
 
 ```html
-<iframe src="//sample.com/gst/iframe.html" frameborder="0" width="720" height="500"></iframe>
+<iframe src="//sample.com/gst/iframe.html" frameborder="0" width="730" height="510"></iframe>
 ```
 
 ## Advanced
@@ -48,7 +49,7 @@ You can easily convert a data-sheet into `json` with [Mr. Data Converter](https:
 ### Notices
 
 If GST is loaded as iframe,
-it will notify parent window by `window.postMessage()`,
+it will notify parent window by `[window.postMessage()](https://developer.mozilla.org/en-US/docs/Web/API/Window/postMessage)`,
 when each round of game is finished,
 and when user want to see detail of rules.
 
@@ -70,6 +71,10 @@ and when user want to see detail of rules.
 * JavaScript: [standard](https://github.com/standard/standard)
 
 ### Change Log
+
+__180817__
+
+* add tutorial
 
 __180816__
 

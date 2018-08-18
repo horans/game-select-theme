@@ -16,11 +16,11 @@
     *  description: iframe to be embedded                *
     *  author: horans@gmail.com                          *
     *  url: https://github.com/horans/game-theme-select  *
-    *  update: 180816                                    *
+    *  update: 180817                                    *
     *****************************************************/
     -->
 
-    <main id="app" class="gst-app" :class="{ 'ready': state.init, 'loading': state.wait, 'running': game.running, 'iframe': state.iframe }">
+    <main id="app" class="gst-app" :class="{ 'ready': state.init, 'loading': state.wait, 'iframe': state.iframe, 'running': game.running, 'again': again }">
       <article class="gst-container shadow">
         <section class="gst-main">
           <div class="gst-stage center" v-if="state.init">
@@ -42,6 +42,13 @@
                 <div class="gst-remain shadow" ref="remain" :style="{ animationDuration: game.config.tick + 's' }"></div>
               </div>
             </div>
+            <div class="gst-tutorial" v-if="!game.tutorial">
+              <div class="gst-start">
+                <p>Click on the theme you think is right for this image on the bottom.</p>
+                <p>Time is ticking on the top.</p>
+                <button class="gst-button" @click="startGame">got it!</button>
+              </div>
+            </div>
           </div>
           <div class="gst-cover center">
             <div class="gst-back">
@@ -50,19 +57,23 @@
               </ul>
             </div>
             <div class="gst-front">
-              <h1 class="gst-heading">{{ game.config.title }}</h1>
-              <div class="gst-start">
-                <button class="gst-button" @click="startGame" v-html="again ? 'Restart <small>with Same Level</small>' : 'Start Now'"></button>
-              </div>
-              <div class="gst-rules" v-if="state.iframe && !again">How to play the game? <span class="hand" @click="notifyParent('rules')">Get a hint &raquo;</span></div>
-              <div class="gst-result" v-if="again">
+              <h2 class="gst-result" v-if="again">
                 <span>score: {{ game.last.score }}</span>
                 <span>total: {{ game.last.total }}</span>
                 <span>time: {{ formatTime(game.last.time) }}s</span>
                 <span>level: {{ game.last.level }}</span>
+              </h2>
+              <h1 class="gst-heading" v-else>{{ game.config.title }}</h1>
+              <div class="gst-start">
+                <button class="gst-button" v-if="again" @click="startGame">replay <small>with same level</small></button>
+                <button class="gst-button" v-else @click="showTutorial">start now</button>
               </div>
+              <div class="gst-rules" v-if="state.iframe && !again">How to play the game? <span class="hand" @click="notifyParent('rule')">Get a hint &raquo;</span></div>
               <div class="gst-levels" v-if="again">
-                <button class="gst-button gst-button-small" v-for="item in game.levels" @click="switchLevel(item)">{{ item }}</button>
+                <p>choose a game level:</p>
+                <div>
+                  <button class="gst-button gst-button-small" v-for="item in game.levels" @click="switchLevel(item)">{{ item }}</button>
+                </div>
               </div>
               <div class="gst-themes">
                 <span>{{ game.config.themes }}:</span>

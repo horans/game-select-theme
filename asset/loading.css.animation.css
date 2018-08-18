@@ -3,8 +3,8 @@
 *  description: loading animation                    *
 *  author: YK KATE                                   *
 *  url: https://codepen.io/ykathryn/pen/egmydz       *
-*  update: 180815                                    *
+*  update: 180817                                    *
 *****************************************************/
-.gts-loading-item::before, .gts-loading-item::after { animation: width 1s linear infinite; background-color: var(--secondary); border-radius: 10px; content:''; display: block; height: 5px; left: 0; position: absolute; top: 50%; width: 100%; } /* csslint allow: known-properties */
-.gts-loading-item::after { -webkit-animation-delay: -0.3s; -moz-animation-delay: -0.3s; -o-animation-delay: -0.3s; animation-delay: -0.3s; }
+.gst-loading-item::before, .gst-loading-item::after { animation: width 1s linear infinite; background-color: var(--secondary); border-radius: 10px; content:''; display: block; height: 5px; left: 0; position: absolute; top: 50%; width: 100%; } /* csslint allow: known-properties */
+.gst-loading-item::after { -webkit-animation-delay: -0.3s; -moz-animation-delay: -0.3s; -o-animation-delay: -0.3s; animation-delay: -0.3s; }
 @-webkit-keyframes width { 0% { left: 50%; opacity: 1; width: 0; } 90% { left: 0; opacity: 0; width: 100%; } 100% { opacity: 0; } } @-moz-keyframes width { 0% { left: 50%; opacity: 1; width: 0; } 90% { left: 0; opacity: 0; width: 100%; } 100% { opacity: 0; } } @-o-keyframes width { 0% { left: 50%; opacity: 1; width: 0; } 90% { left: 0; opacity: 0; width: 100%; } 100% { opacity: 0; } } @keyframes width { 0% { left: 50%; opacity: 1; width: 0; } 90% { left: 0; opacity: 0; width: 100%; } 100% { opacity: 0; } }
