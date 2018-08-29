@@ -3,7 +3,7 @@
 *  description: inpage functions                     *
 *  author: horans@gmail.com                          *
 *  url: https://github.com/horans/game-theme-select  *
-*  update: 180818                                    *
+*  update: 180829                                    *
 *****************************************************/
 /* global _, Vue, WebFont */
 /* eslint no-unused-vars: ["error", { "varsIgnorePattern": "gst" }] */
@@ -44,7 +44,6 @@ var gst = new Vue({
       },
       frames: [],
       covers: [],
-      cover: 6,
       current: 0,
       last: {}
     },
@@ -88,6 +87,10 @@ var gst = new Vue({
     // current frame
     frame: function () {
       return (this.game.current < 9 ? '0' : '') + (this.game.current + 1)
+    },
+    // cover number is even
+    even: function () {
+      return this.game.config.cover % 2 === 0
     }
   },
   methods: {
@@ -114,6 +117,7 @@ var gst = new Vue({
       if (c.option > Math.round(t.templates.length / 2)) t.game.config.option = Math.round(t.templates.length / 2)
       if (c.option < 2) t.game.config.option = 2
       if (c.tick < 1) t.game.config.tick = 1
+      if (c.cover < 1) t.game.config.cover = 1
       // set frames
       t.game.frames = _.shuffle(t.templates).slice(0, t.game.config.total)
       _.each(t.game.frames, function (o, i) {
@@ -121,7 +125,7 @@ var gst = new Vue({
         t.$set(t.game.frames[i], 'answer', '')
       })
       // set covers
-      t.game.covers = _.shuffle(t.templates).slice(0, t.game.cover)
+      t.game.covers = _.shuffle(t.templates).slice(0, t.game.config.cover)
       // set states
       t.game.running = false
       _.each(t.game.time, function (o, k) {
@@ -260,9 +264,7 @@ var gst = new Vue({
                 delete t.templates[i].title
                 delete t.templates[i].desc
                 t.templates[i].load = false
-                setTimeout(function () {
-                  t.getImage('cover', o.cover, i)
-                }, Math.floor(i / 3) * 50)
+                t.getImage('cover', o.cover, i)
               })
               t.$set(t.$data, 'themes', _.uniq(_.map(t.templates, 'theme')))
               break

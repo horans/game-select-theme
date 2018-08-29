@@ -16,7 +16,7 @@
     *  description: iframe to be embedded                *
     *  author: horans@gmail.com                          *
     *  url: https://github.com/horans/game-theme-select  *
-    *  update: 180818                                    *
+    *  update: 180829                                    *
     *****************************************************/
     -->
 
@@ -53,7 +53,7 @@
           <div class="gst-cover center">
             <div class="gst-back">
               <ul class="gst-covers">
-                <li class="float background" v-for="item in game.covers" :style="{ width: 100 * 2 / game.cover + '%', height: '50%', backgroundImage: 'url(' + item.cover + ')' }"></li>
+                <li class="float background" v-for="item in game.covers" :style="{ width: 100 * (even ? 2 : 1) / game.config.cover + '%', height: even ? '50%' : '100%', backgroundImage: 'url(' + item.cover + ')' }"></li>
               </ul>
             </div>
             <div class="gst-front">
