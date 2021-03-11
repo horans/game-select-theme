@@ -82,6 +82,7 @@ $(window).on('message', function (e) {
 * [ES6-Promise](https://github.com/stefanpenner/es6-promise)
 * [Lodash](https://github.com/lodash/lodash)
 * [Vue](https://github.com/vuejs/vue)
+* [vue-axios](https://github.com/imcvampire/vue-axios)
 * [Web Font Loader](https://github.com/typekit/webfontloader)
 
 ### Linter
@@ -92,10 +93,12 @@ $(window).on('message', function (e) {
 
 ### Change Log
 
-__180817__
+```text
+210311
++ update vendors
 
-* add tutorial
+180817
++ add tutorial
 
-__180816__
-
-* initial release
+180816
++ initial release

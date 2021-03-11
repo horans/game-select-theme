@@ -3,10 +3,11 @@
 *  description: inpage functions                     *
 *  author: horans@gmail.com                          *
 *  url: https://github.com/horans/game-theme-select  *
-*  update: 180829                                    *
+*  update: 210311                                    *
 *****************************************************/
 /* global _, Vue, WebFont */
 /* eslint no-unused-vars: ["error", { "varsIgnorePattern": "gst" }] */
+/* eslint no-var: 0 */
 /* bus */
 var bus = new Vue()
 
